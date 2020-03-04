@@ -1,0 +1,5 @@
+<div [style.background-color]="'yellow'">
+
+  <app-child [parentData]="parentData" (onChildEvent)="childData =$event"></app-child>
+  {{childData}}
+</div>

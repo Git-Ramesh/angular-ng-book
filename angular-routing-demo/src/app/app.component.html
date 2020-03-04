@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <p class="h2" style="text-align: center;">Single Page Application</p>
+  <nav class="navbar navbar-light bg-light">
+    <form class="form-inline">
+      <a routerLink="departments" routerLinkActive="active" class="btn btn-sm
+        btn-outline-primary">Departments</a>
+      <a routerLink="employees" routerLinkActive="active" class="ml-2 btn btn-sm
+        btn-outline-primary">Employees</a>
+    </form>
+  </nav>
+  <div class="mt-2">
+    <router-outlet></router-outlet>
+  </div>
+</div>

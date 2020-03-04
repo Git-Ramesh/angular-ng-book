@@ -1,0 +1,18 @@
+<p class="h6">Departments</p>
+<div class="table-responsive-sm">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let department of departments">
+                <th scope="row"><span (click)="onSelect(department)"
+                        [class.selected]="isSelected(department)">{{department.id}}</span></th>
+                <td>{{department.name}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
