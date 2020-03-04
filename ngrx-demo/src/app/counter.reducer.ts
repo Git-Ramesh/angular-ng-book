@@ -4,10 +4,13 @@ import { Action } from '@ngrx/store';
 import { INCREMENT, DECREMENT } from './counter.actions';
 
 export interface Reducer<T> {
-    (state T, action: Action): T;
+	(state: T, action: Action): T;
 }
 
-export const counterReducer: Reducer<CounterState> = (state: CounterState = initialState, action: Action): AppState => {
+export const counterReducer: Reducer<CounterState> = (
+	state: CounterState = initialState,
+	action: Action
+): CounterState => {
 	switch (action.type) {
 		case INCREMENT:
 			return Object.assign({}, state, { counter: state.counter + 1 });
