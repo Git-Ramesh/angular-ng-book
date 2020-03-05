@@ -1,0 +1,78 @@
+<div class="container-fluid">
+  <h2>Registration Form</h2>
+  <strong class="text-danger" [class.d-none]="!errorMessage">{{errorMessage}}</strong>
+  <form [formGroup]="userRegistrationForm" (ngSubmit)="onSubmit()">
+    {{userRegistrationForm.value | json}}<br />
+    {{userRegistrationForm.errors | json}}
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" formControlName="username"
+        [class.is-invalid]="userRegistrationForm.get('username').invalid && userRegistrationForm.get('username').touched"
+        class="form-control" id="username">
+      <!-- <strong class="text-danger"
+        [class.d-none]="userRegistrationForm.get('username').valid || userRegistrationForm.get('username').untouched">Username
+        is required</strong> -->
+      <div *ngIf="userRegistrationForm.get('username').invalid && userRegistrationForm.get('username').touched">
+        <strong *ngIf="userRegistrationForm.controls['username'].hasError('required')" class="text-danger">Username is
+          required</strong>
+        <strong *ngIf="userRegistrationForm.get('username').hasError('minlength')" class="text-danger">Username
+          must be at least 3 characters</strong>
+        <strong *ngIf="userRegistrationForm.get('username').hasError('forbiddenName')"
+          class="text-danger">{{userRegistrationForm.get('username').getError('forbiddenName').value}}
+          username not allowed</strong>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addAlternateEmail()">Add Email</button>
+      <input type="email" formControlName="email" class="form-control" id="email"
+        [class.is-invalid]="userRegistrationForm.get('email').touched && userRegistrationForm.get('email').invalid">
+      <strong class="text-danger"
+        [class.d-none]="userRegistrationForm.get('email').untouched || userRegistrationForm.get('email').valid">Email
+        is required</strong>
+      <div formArrayName="alternateEmails" *ngFor="let email of alternateEmails.controls; let i = index">
+        <input type="text" class="form-control my-1" [formControlName]="i">
+      </div>
+    </div>
+    <div class="form-check mb-3">
+      <input type="checkbox" class="form-check-input" formControlName="subscribe">
+      <label class="form-check-label">Send me promotional offers</label>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" formControlName="password" class="form-control" id="password" name="password">
+      <strong class="text-danger"
+        *ngIf="userRegistrationForm.get('password').hasError('required') && userRegistrationForm.get('password').touched">Password
+        is
+        required</strong>
+    </div>
+    <!-- {{userRegistrationForm.hasError('misMatch')}} -->
+    <div class="form-group">
+      <label for="confirmPassword">Confirm password:</label>
+      <input type="password" formControlName="confirmPassword" class="form-control" id="confirmPassword"
+        name="confirmPassword">
+      <strong *ngIf="userRegistrationForm.hasError('misMatch')" class="text-danger">Password doesn't match</strong>
+      <strong class="text-danger"
+        *ngIf="userRegistrationForm.get('confirmPassword').touched && userRegistrationForm.get('confirmPassword').hasError('required')">Confirm
+        password
+        is
+        required</strong>
+    </div>
+    <div formGroupName="address">
+      <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" formControlName="city" class="form-control" id="city" name="city">
+      </div>
+      <div class="form-group">
+        <label for="state">State:</label>
+        <input type="text" formControlName="state" class="form-control" id="state" name="state">
+      </div>
+      <div class="form-group">
+        <label for="postalCode">Postal code:</label>
+        <input type="text" formControlName="postalCode" class="form-control" id="postalCode" name="postalCode">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!userRegistrationForm.valid">Submit</button>
+    <button type="button" class="btn btn-secondary ml-2" (click)="loadApiData()">Load Api Data</button>
+  </form>
+</div>

@@ -1,0 +1,25 @@
+  <div>
+    <div>
+      <form>
+        <h3>Add a Link</h3>
+        <table>
+          <tbody>
+            <tr>
+              <td>Title:</td>
+              <td><input name="title" #title /></td>
+            </tr>
+            <tr>
+              <td>Link:</td>
+              <td><input name="link" #link /></td>
+            </tr>
+            <tr>
+              <td colspan="2"><button (click)="addArticle(title, link)">Submit Link</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <div>
+      <app-article *ngFor="let article of articles" [article]="article"></app-article>
+    </div>
+  </div>
