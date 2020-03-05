@@ -1,0 +1,12 @@
+[{
+    "isbn": 10112,
+    "title": "Angular",
+    "author": "Jhon",
+    "price": 562
+},
+{
+    "isbn": 10113,
+    "title": "Java",
+    "author": "Mark",
+    "price": 635
+}]
